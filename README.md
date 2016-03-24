@@ -147,7 +147,7 @@ $ mkdir -p urls
 $ cd urls
 $ sudo vi seed.txt
 
-http://nutch.apache.org
+http://nutch.apache.org/
 ```
 
 Edit the file $NUTCH_HOME/runtime/local/conf/regex-urlfilter.txt and replace
