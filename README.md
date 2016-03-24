@@ -13,7 +13,7 @@ $ wget http://www.apache.org/dyn/closer.lua/nutch/2.3.1/apache-nutch-2.3.1-src.t
 $ tar -xzf apache-nutch-2.3.1-src.tar.gz
 $ sudo mv apache-nutch-2.3.1 /opt/nutch-2.3.1
 ```
-Specify Gora backend and other configuration in $NUTCH_HOME/conf/nutch-size.xml.
+Specify Gora backend and other configuration in $NUTCH_HOME/conf/nutch-site.xml.
 
 ```
   <property>
