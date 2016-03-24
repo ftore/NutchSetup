@@ -13,6 +13,6 @@
 
 ##References
 <a href="http://wiki.apache.org/nutch/NutchTutorial">http://wiki.apache.org/nutch/NutchTutorial</a>
-<a href="http://wiki.apache.org/nutch/Nutch2Tutorial"></a>
-<a href="http://hbase.apache.org/book/quickstart.html"></a>
+<a href="http://wiki.apache.org/nutch/Nutch2Tutorial">http://wiki.apache.org/nutch/Nutch2Tutorial</a>
+<a href="http://hbase.apache.org/book/quickstart.html">http://hbase.apache.org/book/quickstart.html</a>
 
