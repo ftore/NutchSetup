@@ -85,15 +85,86 @@ $ vi hbase-site.xml
 Start HBase.
 
 ```
-$ cd $HBASE_HOME/bin/hbase start
+$ cd $HBASE_HOME/bin/start-hbase.sh
 ```
 
-## Integrate HBase with Nutch
 ## Install Solr
+Download Solr.
+
+```
+$ wget http://mirror.apache-kr.org/lucene/solr/4.10.4/solr-4.10.4.tgz
+$ tar -xzf solr-4.10.4.tgz
+$ sudo mv solr-4.10.4 /opt/solr-4.10.4
+
+```
+Do not run Solr yet.
+
 ## Integrate Solr with Nutch
 
+Backup the original Solr example schema.xml:
+```
+$ mv ${APACHE_SOLR_HOME}/example/solr/collection1/conf/schema.xml ${APACHE_SOLR_HOME}/example/solr/collection1/conf/schema.xml.org
+```
+
+Copy the Nutch specific schema.xml to replace it:
+```
+cp ${NUTCH_RUNTIME_HOME}/conf/schema.xml ${APACHE_SOLR_HOME}/example/solr/collection1/conf/
+```
+
+Open the Nutch schema.xml file for editing:
+```
+vi ${APACHE_SOLR_HOME}/example/solr/collection1/conf/schema.xml
+```
+Comment out the following lines (53-54) in the file by changing this:
+```
+   <filter class="solr.EnglishPorterFilterFactory" protected="protwords.txt"/>
+```
+to this
+```
+<!--   <filter class="solr.EnglishPorterFilterFactory" protected="protwords.txt"/> -->
+```
+Add the following line right after the line <field name="id" ... /> (probably at line 69-70)
+```
+<field name="_version_" type="long" indexed="true" stored="true"/>
+```
+If you want to see the raw HTML indexed by Solr, change the content field definition (line 80) to:
+```
+<field name="content" type="text" stored="true" indexed="true"/>
+```
+
+Start Solr:
+```
+$ cd $SOLR_HOME/example 
+$ sudo -E java -jar start.jar
+```
+
+## Crawl your first website
+
+Create a URL seed list in $NUTCH_HOME/runtime/local:
+```
+$ mkdir -p urls
+$ cd urls
+$ sudo vi seed.txt
+
+http://nutch.apache.org
+```
+
+Edit the file $NUTCH_HOME/runtime/local/conf/regex-urlfilter.txt and replace
+```
+# accept anything else
+#+.
++^http://([a-z0-9]*\.)*nutch.apache.org/
+```
+Start crawling:
+```
+$ cd $NUTH_HOME/runtime/local
+$ sudo -E ./bin/crawl urls TestCrawl http://localhost:8983/solr 2
+```
+
+Now you can start searching in <a href="http://localhost:8983/solr/#/collection1/query">http://localhost:8983/solr/#/collection1/query</a>
+
 ##References
-<a href="http://wiki.apache.org/nutch/NutchTutorial">http://wiki.apache.org/nutch/NutchTutorial</a>
-<a href="http://wiki.apache.org/nutch/Nutch2Tutorial">http://wiki.apache.org/nutch/Nutch2Tutorial</a>
-<a href="http://hbase.apache.org/book/quickstart.html">http://hbase.apache.org/book/quickstart.html</a>
+<a href="http://wiki.apache.org/nutch/NutchTutorial">http://wiki.apache.org/nutch/NutchTutorial</a><br />
+<a href="http://wiki.apache.org/nutch/Nutch2Tutorial">http://wiki.apache.org/nutch/Nutch2Tutorial</a><br />
+<a href="http://hbase.apache.org/book/quickstart.html">http://hbase.apache.org/book/quickstart.html</a><br />
 
