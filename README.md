@@ -13,7 +13,7 @@ $ wget http://www.apache.org/dyn/closer.lua/nutch/2.3.1/apache-nutch-2.3.1-src.t
 $ tar -xzf apache-nutch-2.3.1-src.tar.gz
 $ sudo mv apache-nutch-2.3.1 /opt/nutch-2.3.1
 ```
-Specify Gora backend and other configuration in $NUTCH_HOME/conf/nutch-site.xml.
+Specify Gora backend and other configuration in $NUTCH_HOME/conf/nutch-site.xml:
 
 ```
   <property>
@@ -32,7 +32,7 @@ Specify Gora backend and other configuration in $NUTCH_HOME/conf/nutch-site.xml.
 
 ```
 
-Ensure the HBase gora-hbase dependency is available in $NUTCH_HOME/ivy/ivy.xml
+Ensure the HBase gora-hbase dependency is available in $NUTCH_HOME/ivy/ivy.xml:
 
 ```
 <!-- Uncomment this to use HBase as Gora backend. -->
@@ -40,7 +40,7 @@ Ensure the HBase gora-hbase dependency is available in $NUTCH_HOME/ivy/ivy.xml
 <dependency org="org.apache.hbase" name="hbase-common" rev="0.98.8-hadoop2" conf="*->default" />
 ```
 
-Ensure that HBaseStore is set as the default datastore in $NUTCH_HOME/conf/gora.properties.
+Ensure that HBaseStore is set as the default datastore in $NUTCH_HOME/conf/gora.properties:
 
 ```
 gora.datastore.default=org.apache.gora.hbase.store.HBaseStore
@@ -64,7 +64,7 @@ $ sudo vi /etc/hosts
 fe80::1%lo0     ip6-localhost ip6-loopback
 ```
 
-Download HBase.
+Download HBase and make changes to hbase-site.xml:
 ```
 $ wget https://archive.apache.org/dist/hbase/hbase-0.98.8/hbase-0.98.8-hadoop2-bin.tar.gz
 $ tar -xzf hbase-0.98.8-hadoop2-bin.tar.gz
@@ -82,14 +82,15 @@ $ vi hbase-site.xml
     </property>
 
 ```
-Start HBase.
+Start HBase and check by launching HBase shell:
 
 ```
 $ cd $HBASE_HOME/bin/start-hbase.sh
+$ $HBASE_HOME/bin/hbase shell
 ```
 
 ## Install Solr
-Download Solr.
+Download Solr:
 
 ```
 $ wget http://mirror.apache-kr.org/lucene/solr/4.10.4/solr-4.10.4.tgz
