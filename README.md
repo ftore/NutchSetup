@@ -54,8 +54,39 @@ $ ant runtime
 
 ## Install HBase
 
-You may also have to update your /etc/hosts file.
+You may also have to update your /etc/hosts file. Make sure that the hosts file contains the loop back address, which is 127.0.0.1. (In Ubuntu it is 127.0.1.1) 
 
+```
+$ sudo vi /etc/hosts
+
+127.0.0.1       localhost.localdomain localhost akmal-vm
+::1             ip6-localhost ip6-loopback
+fe80::1%lo0     ip6-localhost ip6-loopback
+```
+
+Download HBase.
+```
+$ wget https://archive.apache.org/dist/hbase/hbase-0.98.8/hbase-0.98.8-hadoop2-bin.tar.gz
+$ tar -xzf hbase-0.98.8-hadoop2-bin.tar.gz
+$ sudo mv hbase-0.98.8-hadoop2 /opt/hbase-0.98.8
+$ cd /opt/hbase-0.98.8/conf
+$ vi hbase-site.xml
+
+    <property>
+        <name>hbase.rootdir</name>
+        <value>file:///home/akmal/hbase</value>
+    </property>
+    <property>
+        <name>hbase.zookeeper.property.dataDir</name>
+        <value>/home/akmal/zookeeper</value>
+    </property>
+
+```
+Start HBase.
+
+```
+$ cd $HBASE_HOME/bin/hbase start
+```
 
 ## Integrate HBase with Nutch
 ## Install Solr
