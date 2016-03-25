@@ -85,8 +85,8 @@ $ vi hbase-site.xml
 Start HBase and check by launching HBase shell:
 
 ```
-$ cd $HBASE_HOME/bin/start-hbase.sh
-$ $HBASE_HOME/bin/hbase shell
+$ sudo -E $HBASE_HOME/bin/start-hbase.sh
+$ sudo -E $HBASE_HOME/bin/hbase shell
 ```
 
 ## Install Solr
